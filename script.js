@@ -7,8 +7,13 @@ const pos = { x: 0, y: 0 };
 
 const setPosition = (e) => {
 	const rect = $canvas.getBoundingClientRect();
-	pos.x = e.clientX - rect.left;
-	pos.y = e.clientY - rect.top;
+	const x = e.clientX - rect.left;
+	const y = e.clientY - rect.top;
+
+	if (x < 0 || x > $canvas.width || y < 0 || y > $canvas.height) return;
+
+	pos.x = x;
+	pos.y = y;
 };
 
 const draw = (e) => {
@@ -17,12 +22,12 @@ const draw = (e) => {
 	const color = document.getElementById('color').value;
 
 	ctx.beginPath();
+	ctx.moveTo(pos.x, pos.y);
 
 	ctx.lineWidth = 10;
 	ctx.lineCap = 'round';
 	ctx.strokeStyle = color;
 
-	ctx.moveTo(pos.x, pos.y);
 	setPosition(e);
 	ctx.lineTo(pos.x, pos.y);
 
@@ -60,9 +65,29 @@ const saveCanvas = () => {
 	});
 };
 
+const showGallery = () => {
+	const mockedData = [{ name: 'ChristianECG.png' }];
+	const $imagesContainer = document.getElementById('images');
+
+	mockedData.forEach((user) => {
+		const username = user.name.slice(0, -4);
+		const $img = `<div>
+			<img src="gallery/${user.name}" alt="${username}" />
+			<p>
+				<a href="https://github.com/${username}" target="_blank">
+					${username}
+				</a>
+			</p>
+		</div>`;
+		$imagesContainer.innerHTML += $img;
+	});
+};
+
 document.addEventListener('mousemove', draw);
 canvas.addEventListener('mousedown', setPosition);
 canvas.addEventListener('mouseenter', setPosition);
 
 clear.addEventListener('click', clearCanvas);
 save.addEventListener('click', saveCanvas);
+
+showGallery();
