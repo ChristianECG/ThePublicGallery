@@ -10,3 +10,29 @@
 html {
 	font-family: '--apple-system', 'Poppins', 'Arial', sans-serif;
 }
+
+canvas {
+	display: block;
+	border: 1px solid #000;
+	margin: 0 auto;
+}
+
+#controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+#controls button {
+	padding: 10px 20px;
+	background: #fff;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+
+#controls input {
+	height: 50px;
+	width: 80px;
+	outline: none;
+}
