@@ -35,9 +35,13 @@ const draw = (e) => {
 	ctx.lineTo(pos.x, pos.y);
 
 	ctx.stroke();
+	saveOnLocalStorage();
 };
 
-const clearCanvas = () => ctx.clearRect(0, 0, $canvas.width, $canvas.height);
+const clearCanvas = () => {
+	ctx.clearRect(0, 0, $canvas.width, $canvas.height);
+	clearLocalStorage();
+};
 
 const saveCanvas = () => {
 	Swal.fire({
@@ -65,6 +69,24 @@ const saveCanvas = () => {
 	});
 };
 
+const saveOnLocalStorage = () => {
+	const data = $canvas.toDataURL('image/png');
+	localStorage.setItem('drawing', data);
+};
+
+const loadFromLocalStorage = () => {
+	const data = localStorage.getItem('drawing');
+	if (!data) return;
+
+	const img = new Image();
+	img.src = data;
+	img.onload = () => ctx.drawImage(img, 0, 0);
+};
+
+const clearLocalStorage = () => {
+	localStorage.removeItem('drawing');
+};
+
 const showGallery = async () => {
 	const request = await fetch(API_URL);
 	const data = await request.json();
@@ -82,6 +104,7 @@ const showGallery = async () => {
 		</div>`;
 		$imagesContainer.innerHTML += $img;
 	});
+	loadFromLocalStorage();
 };
 
 document.addEventListener('mousemove', draw);
