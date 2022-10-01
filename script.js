@@ -1,3 +1,6 @@
+const API_URL =
+	'https://api.github.com/repos/ChristianECG/ThePublicGallery/contents/gallery';
+
 const $clear = document.getElementById('clear');
 const $save = document.getElementById('save');
 
@@ -41,9 +44,6 @@ const saveCanvas = () => {
 		title: 'Save your drawing',
 		text: 'Enter your GitHub username to save your drawing, and make sure to save on the "gallery" folder.',
 		input: 'text',
-		inputAttributes: {
-			autocapitalize: 'off',
-		},
 		showCancelButton: true,
 		confirmButtonText: 'Save',
 		showLoaderOnConfirm: true,
@@ -65,11 +65,12 @@ const saveCanvas = () => {
 	});
 };
 
-const showGallery = () => {
-	const mockedData = [{ name: 'ChristianECG.png' }];
+const showGallery = async () => {
+	const request = await fetch(API_URL);
+	const data = await request.json();
 	const $imagesContainer = document.getElementById('images');
 
-	mockedData.forEach((user) => {
+	data.forEach((user) => {
 		const username = user.name.slice(0, -4);
 		const $img = `<div>
 			<img src="gallery/${user.name}" alt="${username}" />
@@ -90,4 +91,4 @@ canvas.addEventListener('mouseenter', setPosition);
 clear.addEventListener('click', clearCanvas);
 save.addEventListener('click', saveCanvas);
 
-showGallery();
+document.addEventListener('DOMContentLoaded', showGallery);
