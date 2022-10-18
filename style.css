@@ -22,6 +22,14 @@ a {
 	color: #4c00ff;
 }
 
+.zoom {
+    transition: transform .2s; 
+}
+ 
+.zoom:hover {
+    transform: scale(1.1); 
+}
+
 #controls {
 	display: flex;
 	justify-content: center;
