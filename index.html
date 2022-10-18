@@ -12,8 +12,8 @@
 	<body>
 		<header class="bg-info">
 			<div>
-				<h1 class="">This is just the public collaborative gallery</h1>
-				<p class="text-secondary h5">
+				<h1 class="d-flex justify-content-center ">This is just the public collaborative gallery</h1>
+				<p class="text-secondary h5 d-flex justify-content-center">
 					Here you can create your own art and share it with the world.
 					You can also see what other people have created. Enjoy!
 				</p>
@@ -31,12 +31,14 @@
 				</div>
 			</section>
 			<section id="gallery">
-				<h2>Gallery</h2>
-				<div id="images"></div>
+				<h2 class="d-flex justify-content-center display-2">Gallery</h2>
+				<div class="zoom" id="images"></div>
 			</section>
 		</main>
 		<footer>
-			<p>Built by open source contributors on GitHub.</p>
+			<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+				<p>Built by open source contributors on GitHub.</p>
+			</div>
 		</footer>
 	</body>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
