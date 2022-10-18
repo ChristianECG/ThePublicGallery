@@ -97,7 +97,7 @@ const showGallery = async () => {
 		const $img = `<div>
 			<img src="gallery/${user.name}" alt="${username}" />
 			<p>
-				<a href="https://github.com/${username}" target="_blank">
+				<a id="nombreGit" href="https://github.com/${username}" target="_blank">
 					${username}
 				</a>
 			</p>
